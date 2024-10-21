@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cli-cat-tool"
+version = "0.1.0"
+description = "Python Implementation of Unix CLI cat tool."
+authors = [
+    {name = "Uche Okereke", email = "orezpablo@gmail.com"},
+]
+dependencies = [
+    "click>=8.0.0",
+]
+
+[project.scripts]
+word-count = "cat_tool.cli:main"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
