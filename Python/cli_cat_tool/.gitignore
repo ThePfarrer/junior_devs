@@ -1,2 +1,5 @@
 /.idea/
 /.venv/
+/src/cli_cat_tool.egg-info/
+/build/
+__pycache__/

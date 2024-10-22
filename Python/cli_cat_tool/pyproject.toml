@@ -14,7 +14,7 @@ dependencies = [
 ]
 
 [project.scripts]
-word-count = "cat_tool.cli:main"
+pycat = "cat_tool.cli:main"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
