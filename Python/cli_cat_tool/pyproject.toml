@@ -7,10 +7,12 @@ name = "cli-cat-tool"
 version = "0.1.0"
 description = "Python Implementation of Unix CLI cat tool."
 authors = [
-    {name = "Uche Okereke", email = "orezpablo@gmail.com"},
+    { name = "Uche Okereke", email = "orezpablo@gmail.com" },
 ]
 dependencies = [
     "click>=8.0.0",
+    "black",
+    "pytest"
 ]
 
 [project.scripts]
@@ -22,3 +24,7 @@ addopts = "-ra -q"
 testpaths = [
     "tests",
 ]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
