@@ -1,19 +1,24 @@
-def process(chunk):
-    text = chunk.decode('utf-8')
-    return text
+import sys
 
 
-def cat(file_path):
+def cat(file_path=None):
     try:
         chunk_size = 1024
-        with open(file_path, 'rb') as file:
+        if file_path:
+            with open(file_path, 'r') as file:
+                while True:
+                    chunk = file.read(chunk_size)
+                    if not chunk:
+                        break
+                    yield chunk
+        else:
             while True:
-                chunk = file.read(chunk_size)
+                chunk = sys.stdin.read(chunk_size).rstrip()
                 if not chunk:
                     break
                 yield chunk
+
     except FileNotFoundError:
         return f"Error: No file found in {file_path}"
     except IOError:
         return f"Error: There was an issue reading the file {file_path}"
-
