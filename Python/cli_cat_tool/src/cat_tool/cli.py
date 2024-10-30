@@ -4,18 +4,23 @@ from .cat import cat
 
 
 @click.command()
-@click.option('-n', 'number', is_flag=True, help='number all output lines')
-@click.option('-b', 'number_nonblank', is_flag=True, help='number nonempty output lines, overrides -n')
-@click.argument('file_path', nargs=-1)
+@click.option("-n", "number", is_flag=True, help="number all output lines")
+@click.option(
+    "-b",
+    "number_nonblank",
+    is_flag=True,
+    help="number nonempty output lines, overrides -n",
+)
+@click.argument("file_path", nargs=-1)
 def main(number, number_nonblank, file_path):
     """
     Concatenate FILE(s) to standard output.
 
     With no FILE, or when FILE is -, read standard input.
-"""
+    """
 
     if file_path:
-        if file_path[0] == '-' and len(file_path) == 1:
+        if file_path[0] == "-" and len(file_path) == 1:
             file_contents = cat()
             for chunk in file_contents:
                 click.echo(chunk)
@@ -42,5 +47,5 @@ def main(number, number_nonblank, file_path):
                         click.echo()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

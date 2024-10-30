@@ -5,7 +5,7 @@ def cat(file_path=None):
     try:
         chunk_size = 1024
         if file_path:
-            with open(file_path, 'r') as file:
+            with open(file_path, "r") as file:
                 while True:
                     chunk = file.read(chunk_size)
                     if not chunk:
