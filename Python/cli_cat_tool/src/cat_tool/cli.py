@@ -19,32 +19,43 @@ def main(number, number_nonblank, file_path):
     With no FILE, or when FILE is -, read standard input.
     """
 
-    if file_path:
-        if file_path[0] == "-" and len(file_path) == 1:
-            file_contents = cat()
-            for chunk in file_contents:
-                click.echo(chunk)
-        else:
-            for files in file_path:
-                file_contents = cat(files)
-                for chunk in file_contents:
-                    click.echo(chunk, nl=False)
-    else:
+    if not file_path or (file_path == ("-",)):
         file_contents = cat()
         for chunk in file_contents:
-            chunk = chunk.split("\n")
-            if number:
-                for indx, content in enumerate(chunk, 1):
-                    click.echo(f"     {indx}  {content}")
+            display_with_line_numbers(chunk, number, number_nonblank)
+    else:
+        for files in file_path:
+            output_file_contents(files, number, number_nonblank)
 
-            if number_nonblank:
-                indx = 1
-                for content in chunk:
-                    if content:
-                        click.echo(f"     {indx}  {content}")
-                        indx += 1
-                    else:
-                        click.echo()
+
+def display_with_line_numbers(content, number=False, number_nonblank=False):
+    """
+    Display content with line numbers if specified.
+    """
+    lines = content.split("\n")
+    line_number = 1
+    for line in lines:
+        if number:
+            click.echo(f"     {line_number}  {line}")
+            line_number += 1
+
+        elif number_nonblank:
+            if line:
+                click.echo(f"     {line_number}  {line}")
+                line_number += 1
+            else:
+                click.echo()
+        else:
+            click.echo(line)
+
+
+def output_file_contents(file_path, number, number_nonblank):
+    """
+    Outputs the contents of a file, with optional line numbering.
+    """
+    file_contents = cat(file_path)
+    for chunk in file_contents:
+        display_with_line_numbers(chunk, number, number_nonblank)
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ def cat(file_path=None):
         if file_path:
             with open(file_path, "r") as file:
                 while True:
-                    chunk = file.read(chunk_size)
+                    chunk = file.read(chunk_size).rstrip()
                     if not chunk:
                         break
                     yield chunk
@@ -19,6 +19,6 @@ def cat(file_path=None):
                 yield chunk
 
     except FileNotFoundError:
-        return f"Error: No file found in {file_path}"
+        yield f"Error: No file found in {file_path}"
     except IOError:
-        return f"Error: There was an issue reading the file {file_path}"
+        yield f"Error: There was an issue reading the file {file_path}"
